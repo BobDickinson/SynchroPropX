@@ -30,6 +30,7 @@ function getFavoriteProperties(favorites, callback)
     var options = 
     {
         url: "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&guid=" + favorites.join() + "&encoding=json&listing_type=buy",
+        headers: { 'User-Agent': 'request' }, // 403 if you don't have a User-Agent in request
         timeout: 5000
     }
 
@@ -61,7 +62,7 @@ exports.InitializeViewModel = function(context, session, params, state)
                 // If the visited property is not in session.favs, then it was unfavorited while being visited,
                 // so we need to remove it from the list of properties we are restoring
                 //
-                state.properties.remove(function(prop){ return prop.guid == state.visited_property });
+                lodash.remove(state.properties, function(prop){ return prop.guid == state.visited_property });
             }
 
             viewModel.properties = state.properties;

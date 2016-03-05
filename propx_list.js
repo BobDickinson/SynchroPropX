@@ -53,6 +53,7 @@ function searchForProperties(criteria, page, callback)
     var options = 
     {
         url: "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&" + criteria + "&encoding=json&listing_type=buy",
+        headers: { 'User-Agent': 'request' }, // 403 if you don't have a User-Agent in request
         timeout: 5000
     }
 

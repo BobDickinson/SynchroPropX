@@ -1,5 +1,7 @@
 ﻿// Property Cross - property details page
 //
+var lodash = require('lodash');
+
 exports.View =
 {
     title: "Property Details",
@@ -43,7 +45,7 @@ exports.Commands =
         }
         else
         {
-            session.favs.remove(viewModel.property.guid);
+            lodash.pull(session.favs, viewModel.property.guid);
         }
     },
 }
