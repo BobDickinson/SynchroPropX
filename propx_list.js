@@ -144,7 +144,7 @@ function * findAndLoadPropertiesByProximity(context, session, viewModel, page)
     try
     {
         var criteria = "centre_point=" + viewModel.searchPosition.latitude + "," + viewModel.searchPosition.longitude;
-        var props = yield Synchro.waitForAwaitable(context, searchForProperties, criteria, page);
+        var props = yield Synchro.yieldAwaitable(context, function(callback){ searchForProperties(criteria, page, callback) });
 
         viewModel.isLoading = false;
         viewModel.isLoadingMore = false;
@@ -179,7 +179,7 @@ function * findAndLoadPropertiesByPlace(context, session, viewModel, page)
     try
     {
         var criteria = "place_name=" + (viewModel.searchLocation ? viewModel.searchLocation.place_name : viewModel.searchTerm);
-        var props = yield Synchro.waitForAwaitable(context, searchForProperties, criteria, page);
+        var props = yield Synchro.yieldAwaitable(context, function(callback){ searchForProperties(criteria, page, callback) });
 
         viewModel.isLoading = false;
         viewModel.isLoadingMore = false;

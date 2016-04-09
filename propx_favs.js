@@ -92,7 +92,7 @@ exports.LoadViewModel = function * (context, session, viewModel)
 
         try
         {
-            var props = yield Synchro.waitForAwaitable(context, getFavoriteProperties, session.favs);
+            var props = yield Synchro.yieldAwaitable(context, function(callback){ getFavoriteProperties(session.favs, callback) });
             if (props.response.listings)
             {
                 // Since we're going to be serializing the property list to the session (via the viewModel and possibly the nav stack),
