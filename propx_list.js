@@ -260,7 +260,7 @@ exports.Commands =
     {
         // Stash the property list in the session so we can pull it back it when we navigate back here.
         //
-        var state = lodash.pick(viewModel, "searchLocation", "searchPosition", "message", "properties", "page", "totalPages", "totalProperties");
+        var state = lodash.pick(viewModel, "searchLocation", "searchPosition", "message", "properties", "page", "totalPages", "totalProperties", "isMore");
         return Synchro.pushAndNavigateTo(context, "propx_detail", { property: params.property }, state);
     },
 
