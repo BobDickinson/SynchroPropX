@@ -10,9 +10,15 @@ exports.View =
     [
         { control: "stackpanel", orientation: "Vertical", width: "*", height: "*", contents: [
 
-            { control: "stackpanel", orientation: "Horizontal", width: "*", contents: [
-                { control: "progressring", value: "{isLoading}", height: 40, width: 40, verticalAlignment: "Center", visibility: "{isLoading}" },
-                { control: "text", value: "{message}", width: "*", fontsize: 12, verticalAlignment: "Center", visibility: "{message}" },
+            { select: "First", contents: [
+                { filter: { deviceMetric: "os", is: "Web" }, control: "stackpanel", orientation: "Vertical", width: "*", contents: [
+                    { control: "progressring", width: 300, value: "{isLoading}", verticalAlignment: "Center", visibility: "{isLoading}" },
+                    { control: "text", value: "{message}", width: "*", fontsize: 12, verticalAlignment: "Center", visibility: "{message}" },
+                ] },
+                { control: "stackpanel", orientation: "Horizontal", width: "*", contents: [
+                    { control: "progressring", value: "{isLoading}", height: 40, width: 40, verticalAlignment: "Center", visibility: "{isLoading}" },
+                    { control: "text", value: "{message}", width: "*", fontsize: 12, verticalAlignment: "Center", visibility: "{message}" },
+                ] },
             ] },
 
             { control: "stackpanel", width: "*", height: "*", visibility: "{properties}", contents: [    
@@ -123,7 +129,7 @@ function populateViewModelPropertiesFromResponse(viewModel, response)
     viewModel.totalProperties = response.total_results ? parseInt(response.total_results) : 0; // 0 if null/undefined
     if (viewModel.page == 1)
     {
-        viewModel.properties = [];                
+        viewModel.properties = [];
     }
 
     response.listings.forEach(function(listing)
@@ -193,7 +199,7 @@ function * findAndLoadPropertiesByPlace(context, session, viewModel, page)
             if (!viewModel.searchLocation)
             {
                 viewModel.searchTerm = null;
-                viewModel.searchLocation = lodash.pick(props.response.locations[0], "place_name", "title", "long_title");                
+                viewModel.searchLocation = lodash.pick(props.response.locations[0], "place_name", "title", "long_title");
             }
 
             // Put this search on top of the recent searches list (removing previous references to it, and trunctating the list)
@@ -215,7 +221,7 @@ function * findAndLoadPropertiesByPlace(context, session, viewModel, page)
                 viewModel.locations.push(
                     lodash.pick(location, "place_name", "title", "long_title")
                     );
-            });            
+            });
 
             viewModel.message = "One or more locations found matching " + viewModel.searchTerm;
         }            

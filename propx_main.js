@@ -9,12 +9,15 @@ exports.View =
 
             { control: "location", binding: "position" },
 
-            { control: "text", width: "*", value: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My Location' to search your current location", fontsize: 10 },
+            { control: "text", width: "*", value: "Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'Use My Location' to search your current location", fontsize: 10 },
             { control: "stackpanel", orientation: "Vertical", margin: { top: 10 }, width: "*", contents: [
                 { control: "edit", binding: "searchTerm", placeholder: "place name or postcode", width: "320"},
                 { control: "stackpanel", orientation: "Horizontal", margin: 0, width: "*", contents: [
-                    { control: "button", caption: "Go", verticalAlignment: "Center", binding: "placenameSearch", enabled: "{searchTerm}" },
-                    { control: "button", caption: "My location", verticalAlignment: "Center", binding: "locationSearch", visibility: "{position.available}", enabled: "{position.coordinate}" },
+                    { control: "button", caption: "Search", verticalAlignment: "Center", binding: "placenameSearch", enabled: "{searchTerm}" },
+                    /* !!! Broken - no guid
+                    { filter: { deviceMetric: "os", is: "Web" }, control: "button", caption: "View Favorites", binding: "favs" },
+                    */
+                    { control: "button", caption: "Use My Location", verticalAlignment: "Center", binding: "locationSearch", visibility: "{position.available}", enabled: "{position.coordinate}" },
                 ] },
             ] },
 
