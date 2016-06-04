@@ -13,11 +13,11 @@ exports.View =
             { control: "stackpanel", orientation: "Vertical", margin: { top: 10 }, width: "*", contents: [
                 { control: "edit", binding: "searchTerm", placeholder: "place name or postcode", width: "320"},
                 { control: "stackpanel", orientation: "Horizontal", margin: 0, width: "*", contents: [
-                    { control: "button", caption: "Search", verticalAlignment: "Center", binding: "placenameSearch", enabled: "{searchTerm}" },
+                    { control: "button", caption: "Search", icon: "search", verticalAlignment: "Center", binding: "placenameSearch", enabled: "{searchTerm}" },
                     /* !!! Broken - no guid
                     { filter: { deviceMetric: "os", is: "Web" }, control: "button", caption: "View Favorites", binding: "favs" },
                     */
-                    { control: "button", caption: "Use My Location", verticalAlignment: "Center", binding: "locationSearch", visibility: "{position.available}", enabled: "{position.coordinate}" },
+                    { control: "button", caption: "Use My Location", icon: "my_location", verticalAlignment: "Center", binding: "locationSearch", visibility: "{position.available}", enabled: "{position.coordinate}" },
                 ] },
             ] },
 
